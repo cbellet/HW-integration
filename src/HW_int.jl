@@ -1,71 +1,62 @@
 
 module HW_int
 
-
-	# question 1 b) 
-	# here are the packages I used
-
 	using FastGaussQuadrature
-	using Roots
-	using Sobol
+
 	using PyPlot
+
 	using Distributions
 
-	# here are some functions I defined for useage 
-	# in several sub questions
+	# question 1 a)
+a = 2
+b = -0.5
+q(p) = a * exp(b * log(p))
+p = collect(linspace(0,10,100)) 
+c = 1
 
-	# demand function
+q(1)
+q(4)
 
-	# gauss-legendre adjustment factors for map change
+plot(p, [q(p) ones(size(p))*1 ones(size(p))*2]) 
+xlabel("Price")
+ylabel("Quantity")
 
-	# eqm condition for question 2
-	# this is the equilibrium condition: total demand = supply, 
+# Computing change in consumer surplus:
+
+quadgk(q, 1, 4; reltol=sqrt(0))
+# Surplus change of 3.99
 
 
-	# weighted sum for integration from the slides.
+	# question 1 b) 
 
 
+# GAUSS-LEGENDRE 
 
 	function question_1b(n)
 
-	end
-
-
-	function question_1c(n)
-
-	end
-
-
-	function question_1d(n)
+w(p) = (3/2) * a * exp(b * log(3/2 * p + 5/2))
+nodes, weights = gausslegendre(n);
+plot(nodes, w(nodes), ".") 
+return @time dot(weights, w(nodes))
 
 	end
 
 
-	function question_2a(n)
-
-	end
-
-
-	function question_2b(n)
-
-	end	
 
 
 	# function to run all questions
-	function runall(n=10)
+	function runall(n)
 		println("running all questions of HW-integration:")
 		println("results of question 1:")
 		question_1b(n)	# make sure your function prints some kind of result!
-		question_1c(n)
-		question_1d(n)
+		println("question_1c: I could not solve this question")
+		println("question_1d: I could not solve this question")
 		println("")
 		println("results of question 2:")
-		q2 = question_2a(n)
-		println(q2)
-		q2b = question_2b(n)
-		println(q2b)
+		println("I could not solve this question")
+
 		println("end of HW-integration")
 	end
 
-end
+
 
